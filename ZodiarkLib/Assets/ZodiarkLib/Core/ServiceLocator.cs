@@ -5,18 +5,38 @@ using UnityEngine;
 
 namespace ZodiarkLib.Core
 {
+    /// <summary>
+    /// Service locator use contains services along with its interface
+    /// </summary>
     public static class ServiceLocator
     {
         #region Fields
 
+        /// <summary>
+        /// Normal services map
+        /// </summary>
         private static Dictionary<Type, object> s_map = new();
+        /// <summary>
+        /// Unity services map
+        /// </summary>
         private static Dictionary<Type, object> s_unityObjectMap = new();
+        /// <summary>
+        /// Multiple services share same type but with different ids map
+        /// </summary>
         private static Dictionary<Type, Dictionary<string,object>> s_multiMap = new();
 
         #endregion
 
         #region Public Methods
 
+        /// <summary>
+        /// Add multi service
+        /// </summary>
+        /// <param name="id">Unique id of this service</param>
+        /// <param name="service"></param>
+        /// <typeparam name="T">Type of service</typeparam>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="DuplicateNameException"></exception>
         public static void AddMulti<T>(string id, T service)
         {
             var type = typeof(T);
@@ -40,6 +60,14 @@ namespace ZodiarkLib.Core
             }
         }
 
+        /// <summary>
+        /// Add new service
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="replace"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="DuplicateNameException"></exception>
         public static void Add<T>(T service , bool replace = false)
         {
             var type = typeof(T);
@@ -56,6 +84,15 @@ namespace ZodiarkLib.Core
             s_map[type] = service;
         }
 
+        /// <summary>
+        /// Add service from Unity Game Object which is a Monobehavior
+        /// </summary>
+        /// <param name="go"></param>
+        /// <param name="replace"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="DuplicateNameException"></exception>
+        /// <exception cref="MissingComponentException"></exception>
         public static void AddFromGO<T>(GameObject go , bool replace = false)
         {
             var type = typeof(T);
@@ -80,6 +117,11 @@ namespace ZodiarkLib.Core
             s_unityObjectMap[type] = component;
         }
         
+        /// <summary>
+        /// Get Service by type either normal type or unity type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static T Get<T>()
         {
             var type = typeof(T);
@@ -96,6 +138,12 @@ namespace ZodiarkLib.Core
             return default;
         }
 
+        /// <summary>
+        /// Get multi service instance by type and its Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static T GetMulti<T>(string id)
         {
             var type = typeof(T);
@@ -110,6 +158,10 @@ namespace ZodiarkLib.Core
             return default;
         }
 
+        /// <summary>
+        /// Remove service by type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
         public static void Remove<T>()
         {
             var type = typeof(T);
@@ -126,6 +178,11 @@ namespace ZodiarkLib.Core
             }
         }
 
+        /// <summary>
+        /// Remove multi service by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <typeparam name="T"></typeparam>
         public static void RemoveMulti<T>(string id)
         {
             var type = typeof(T);
@@ -143,6 +200,9 @@ namespace ZodiarkLib.Core
             }
         }
 
+        /// <summary>
+        /// Remove all services
+        /// </summary>
         public static void RemoveAll()
         {
             s_map.Clear();
@@ -160,6 +220,10 @@ namespace ZodiarkLib.Core
 
         #region Private Methods
 
+        /// <summary>
+        /// Destroy Unity instance
+        /// </summary>
+        /// <param name="obj"></param>
         private static void DestroyInstance(object obj)
         {
             var mono = obj as MonoBehaviour;

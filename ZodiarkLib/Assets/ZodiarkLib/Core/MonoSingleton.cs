@@ -2,6 +2,10 @@ using UnityEngine;
 
 namespace ZodiarkLib.Core
 {
+    /// <summary>
+    /// Allow mono behavior to become singleton class
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class MonoSingleton<T> : MonoBehaviour
                             where T : MonoBehaviour
     {
