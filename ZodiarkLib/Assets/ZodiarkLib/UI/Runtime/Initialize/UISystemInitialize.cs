@@ -1,7 +1,8 @@
 #if INITIALIZE_SYSTEM_ENABLE
 using System.Collections;
-using PlayMobil.Initialize;
 using UnityEngine;
+using ZodiarkLib.Initialize;
+using ZodiarkLib.UI;
 
 namespace PlayMobil.UI
 {
