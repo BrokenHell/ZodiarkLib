@@ -58,3 +58,10 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+ZodiarkLib/.idea
+ZodiarkLib/Library
+ZodiarkLib/Logs
+ZodiarkLib/Temp
+ZodiarkLib/UserSettings/Layouts/default-2021.dwlt
+ZodiarkLib/UserSettings/Search.settings
+ZodiarkLib/obj
