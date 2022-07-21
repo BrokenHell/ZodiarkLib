@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ZodiarkLib.SaveSystem
 {
-    public class SaveManager : ISaveManager
+    public sealed class SaveManager : ISaveManager
     {
         #region Fields
 
@@ -60,6 +60,5 @@ namespace ZodiarkLib.SaveSystem
         }
 
         #endregion
-        
     }   
 }

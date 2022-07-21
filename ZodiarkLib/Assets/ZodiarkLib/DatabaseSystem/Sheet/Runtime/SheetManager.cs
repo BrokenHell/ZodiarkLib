@@ -67,7 +67,7 @@ namespace ZodiarkLib.Database.Sheet
 
         #region Private Methods
 
-        public string[] ParseContent(string content)
+        private string[] ParseContent(string content)
         {
             var lines = new List<string>();
             var arrays = content.Split("\n");

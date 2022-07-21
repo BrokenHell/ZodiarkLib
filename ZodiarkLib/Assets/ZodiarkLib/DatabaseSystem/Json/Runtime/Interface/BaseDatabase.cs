@@ -1,17 +1,11 @@
 using System.Collections.Generic;
 
-namespace ZodiarkLib.Database.Sheet
+namespace ZodiarkLib.Database
 {
-    public abstract class BaseSheet<T,K> : ISheet where T : IRecord<K>
+    public abstract class BaseDatabase<T,K> : IDatabase where T : IDataRecord<K>
     {
         #region Fields
-        protected Dictionary<K, T> _dict = new();
-        #endregion
-
-        #region Properties
-
-        public IReadOnlyDictionary<K, T> Records => _dict;
-
+        public Dictionary<K, T> records = new();
         #endregion
 
         #region Public Methods
@@ -22,12 +16,12 @@ namespace ZodiarkLib.Database.Sheet
         /// <param name="record"></param>
         public void Add(T record)
         {
-            if (_dict.ContainsKey(record.Id))
+            if (records.ContainsKey(record.Id))
             {
                 return;
             }
 
-            _dict[record.Id] = record;
+            records[record.Id] = record;
         }
 
         /// <summary>
@@ -37,7 +31,7 @@ namespace ZodiarkLib.Database.Sheet
         /// <returns></returns>
         public T Get(K id)
         {
-            return _dict.ContainsKey(id) ? _dict[id] : default;
+            return records.ContainsKey(id) ? records[id] : default;
         }
 
         /// <summary>
@@ -46,14 +40,8 @@ namespace ZodiarkLib.Database.Sheet
         /// <param name="id"></param>
         public void Remove(K id)
         {
-            _dict.Remove(id);
+            records.Remove(id);
         }
-
-        /// <summary>
-        /// Load records
-        /// </summary>
-        /// <param name="lines"></param>
-        public abstract void Load(string[] lines);
 
         #endregion
     }
