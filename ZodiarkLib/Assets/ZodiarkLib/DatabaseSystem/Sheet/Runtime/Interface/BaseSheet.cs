@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace ZodiarkLib.Database.Sheet
 {
@@ -54,6 +55,15 @@ namespace ZodiarkLib.Database.Sheet
         /// </summary>
         /// <param name="lines"></param>
         public abstract void Load(string[] lines);
+
+        #endregion
+        
+        #region Private Methods
+
+        protected string[] SplitContent(string content)
+        {
+            return Regex.Split(content, SheetManager.PHASE_SPLIT_RE);
+        }
 
         #endregion
     }

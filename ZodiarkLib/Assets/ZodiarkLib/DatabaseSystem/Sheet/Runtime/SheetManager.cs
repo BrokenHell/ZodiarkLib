@@ -1,10 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace ZodiarkLib.Database.Sheet
 {
     public sealed class SheetManager : ISheetManager
     {
+        public static string LINE_SPLIT_RE = @"\r\n|\n\r";
+        public static string PHASE_SPLIT_RE = ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)";
+        
         #region Fields
 
         private Dictionary<Type, ISheet> _sheets = new();
@@ -69,13 +74,7 @@ namespace ZodiarkLib.Database.Sheet
 
         private string[] ParseContent(string content)
         {
-            var lines = new List<string>();
-            var arrays = content.Split("\n");
-            foreach (var s in arrays)
-            {
-                lines.Add(s.Replace("\r", ""));
-            }
-
+            var lines = Regex.Split(content, LINE_SPLIT_RE).ToList();
             return lines.ToArray();
         }
 

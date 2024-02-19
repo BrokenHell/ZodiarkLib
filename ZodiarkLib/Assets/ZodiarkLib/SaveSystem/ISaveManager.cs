@@ -11,6 +11,10 @@ namespace ZodiarkLib.SaveSystem
         /// <param name="saveFolder"></param>
         /// <param name="reader"></param>
         /// <param name="writer"></param>
+        /// Data/global_data/global_profile_meta , sound_global_data , graphic_setting_global_data ,
+        ///                         profile_slot_data
+        /// Data/profile/user_name_1_data/user_1_meta , inventory_data , stage_data
+        /// Data/profile/user_name_2_data/user_2_meta , inventory_data
         void Initialize(string saveFolder, IReader reader, IWriter writer);
         /// <summary>
         /// Save data

@@ -22,6 +22,8 @@ namespace ZodiarkLib.UI
 
         #endregion
 
+        #region Public Methods
+
         /// <summary>
         /// Add on show event trigger when dialog is load & show success
         /// </summary>
@@ -76,6 +78,8 @@ namespace ZodiarkLib.UI
             HideAnimation = animation;
             return this;
         }
+
+        #endregion
     }
     
     /// <summary>
